@@ -109,7 +109,7 @@ internal class StudyAreaMenu
 
         if (!saveSession)
         {
-            DisplayMessage("The session won't be saved. Press any key.", "orange");
+            DisplayMessage("The session won't be saved. Press any key.", "red");
             Console.ReadKey();
             return;
         }

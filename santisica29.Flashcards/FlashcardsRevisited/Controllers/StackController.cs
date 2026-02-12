@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using System.Collections;
 using System.Configuration;
 using FlashcardsRevisited.Models;
 
 namespace FlashcardsRevisited.Controllers;
+
 internal class StackController
 {
     static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
