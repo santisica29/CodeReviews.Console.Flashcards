@@ -87,7 +87,7 @@ internal class FlashcardsMenu
     {
         var list = ProcessViewFlashcards();
 
-        int id = GetIntegerInput("Select the Id of the flashcard you want to delete.", "brown");
+        int id = GetIntegerInput("Select the Id of the flashcard you want to delete.");
         
         int idToDelete = 0;
 
@@ -109,7 +109,7 @@ internal class FlashcardsMenu
     {
         var list = ProcessViewFlashcards();
 
-        int id = GetIntegerInput("Select the Id of the flashcard you want to update.", "pink");
+        int id = GetIntegerInput("Select the Id of the flashcard you want to update.");
 
         int idToUpdate = 0;
 
