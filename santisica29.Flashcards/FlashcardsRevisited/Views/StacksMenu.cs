@@ -2,6 +2,7 @@
 using FlashcardsRevisited.Models;
 using Microsoft.IdentityModel.Tokens;
 using Spectre.Console;
+using System.Linq;
 using static FlashcardsRevisited.Helpers.UserInterface;
 
 namespace FlashcardsRevisited.Views;
@@ -153,13 +154,16 @@ internal class StacksMenu
 
     private void ProcessCreateStack()
     {
+        var listOfStacks = _stackController.GetAll();
+
         DisplayMessage("Create a new stack.");
         DisplayMessage("------------------");
 
         string nameInput = GetStringInput("Name (mandatory):");
 
-        while (nameInput.IsNullOrEmpty())
+        while (nameInput.IsNullOrEmpty() || listOfStacks.Any(s => s.StackName.Equals(nameInput)))
         {
+            DisplayMessage("Invalid input, the name can't be empty or another stack with the same name was found", "red");
             nameInput = GetStringInput("Name (mandatory):");
         }
 
