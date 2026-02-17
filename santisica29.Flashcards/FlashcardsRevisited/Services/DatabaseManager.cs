@@ -1,10 +1,32 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
 
 namespace FlashcardsRevisited.Services;
 internal class DatabaseManager
 {
-    internal void CreateTable(string connectionString)
+    internal static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+    internal static string serverConnection = ConfigurationManager.ConnectionStrings["ServerConnection"].ConnectionString;
+
+    public void Initialize()
+    {
+        CreateDatabaseIfNotExist();
+        CreateTable(connectionString);
+    }
+    internal void CreateDatabaseIfNotExist()
+    {
+        using var connection = new SqlConnection(serverConnection);
+
+        var sql = @"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'FlashcardsDB')
+            BEGIN
+                CREATE DATABASE FlashcardsDB
+            END;";
+
+        connection.Execute(sql);
+
+    }
+    internal static void CreateTable(string connectionString)
     {
         using var connection = new SqlConnection(connectionString);
 
@@ -58,6 +80,5 @@ internal class DatabaseManager
             END";
 
         connection.Execute(sqlStudySession);
-
     }
 }

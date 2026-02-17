@@ -30,7 +30,7 @@ internal class StacksMenu
             Console.WriteLine("4 - Delete");
             Console.WriteLine("0 - Go Back");
 
-            string userInput = GetStringInput("Enter your choice");
+            string userInput = GetStringInput("Select your option:");
 
             switch (userInput)
             {
@@ -47,7 +47,11 @@ internal class StacksMenu
                     ProcessDeleteStack();
                     break;
                 case "0":
-                    return;
+                    closeStackMenu = true;
+                    break;
+                default:
+                    DisplayMessage("Invalid input", "red");
+                    break;
             }
 
             Console.ReadKey();
@@ -184,5 +188,7 @@ internal class StacksMenu
             DisplayMessage("No stacks found.", "red");
         else
             TableVisualisation.ShowStacks(listOfStacks, "Stacks");
+
+        DisplayMessage("Press any key");
     }
 }
